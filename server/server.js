@@ -6,14 +6,14 @@ const { typeDefs, resolvers } = require('./schema');
 const { authMiddleware } = require ('./utils/auth')
 const db = require('./config/connection');
 
-const PORT = mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/your-database-name');
+const PORT = process.env.PORT || 3001;
 const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware
 });
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/your-database-name');
+
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
